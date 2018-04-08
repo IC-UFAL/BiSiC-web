@@ -1,0 +1,29 @@
+.all {
+  display:flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.fill-container {
+  flex: 1;
+}
+
+.fill-home {
+  height: 100%;
+}
+
+.witdh-left {
+  width: 15%;
+}
+
+.witdh-center {
+  width: 70%;
+}
+
+.witdh-right {
+  width: 15%;
+}
+
+.height-footer {
+  width: 100%;
+}

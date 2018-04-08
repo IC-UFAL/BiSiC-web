@@ -1,0 +1,49 @@
+<div class="card card-panel">
+  <div class="card-content card-panel">
+    <div class="container">
+      <span class="card-title card-panel"> Informações Pessoais </span>
+      <div class="row vdivide">
+        <div class="col-sm-2">
+          <!-- <img class="circle responsive-img" src="{{v?.photo}}" > -->
+          <img class="img-thumbnail" src="https://www.w3schools.com/images/w3schools_green.jpg">
+        </div>
+        <div class="col-sm-8">
+          <div class="row">
+            <div>
+              <table>
+                <tbody class="striped">
+                  <tr>
+                    <td>Nome:</td>
+                    <td>{{ v?.name }}</td>
+                  </tr>
+                  <tr>
+                    <td>Email:</td>
+                    <td> {{ v?.email }} </td>
+                  </tr>
+                  <tr>
+                    <td>Matrícula:</td>
+                    <td> {{ v?.registry }} </td>
+                  </tr>
+                  <tr>
+                    <td>Multa:</td>
+                    <td> {{ v?.tee | currency:'BRL':true:'1.2-2' }} </td>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <span class="card-title card-panel"> Locações ativas </span>
+      <div class="row vdivide">
+        <div>
+        </div>
+      </div>
+      <span class="card-title card-panel"> Histórico </span>
+      <div class="row vdivide">
+        <div>
+          AAAA
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
