@@ -8,13 +8,13 @@ import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import {
   MatCardModule, MatExpansionModule,
-  MatExpansionPanelTitle,
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
   MatMenuModule,
   MatToolbarModule
 } from '@angular/material';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 
 import { AppComponent } from './app.component';
@@ -73,7 +73,8 @@ export const routing: ModuleWithProviders = RouterModule.forRoot(APP_ROUTES);
     MatMenuModule,
     MatFormFieldModule,
     MatIconModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatCheckboxModule
   ],
   providers: [AuthenticationService, DataService, BookService, AuthGuard],
   bootstrap: [AppComponent]

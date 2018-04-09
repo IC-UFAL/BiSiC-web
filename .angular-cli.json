@@ -19,7 +19,7 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.scss",
+        "../src/assets/stylesheets/styles.scss",
         "../node_modules/tether/dist/css/tether.min.css",
         "../node_modules/bootstrap/dist/css/bootstrap.min.css"
       ],
