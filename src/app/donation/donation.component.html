@@ -1,0 +1,17 @@
+<div class="form-container">
+  <mat-card>
+    <mat-card-title>Doação</mat-card-title>
+
+    <mat-form-field>
+      <input matInput placeholder="Título do livro" [(ngModel)]="donation.bookTitle"
+              required>
+      <mat-error *ngIf="titleControl.invalid">
+        Este campo não pode estar vazio.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-card-footer>
+      <button mat-raised-button color="warn" (click)="send()">Enviar</button>
+    </mat-card-footer>
+  </mat-card>
+</div>

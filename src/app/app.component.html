@@ -1,16 +1,11 @@
-<div class="all">
+<div class="viewport">
   <app-navigation></app-navigation>
 
-  <div class="container grey lighten-3 fill-home">
+  <div class="content-container">
     <router-outlet></router-outlet>
+
+    <mat-toolbar class="footer" color="primary">
+      <span class="fill-remaining-space text-center">© 2018 Copyright - DIACOM IC</span>
+    </mat-toolbar>
   </div>
-
-  <footer class="page-footer blue lighten-1">
-    <div class="footer-copyright blue lighten-1">
-      <div class="container center">
-        <p>© 2018 Copyright - DIACOM IC</p>
-      </div>
-    </div>
-  </footer>
-
 </div>
