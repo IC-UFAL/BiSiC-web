@@ -1,11 +1,13 @@
-<nav class="navbar-fixed">
-  <div class="nav-wrapper blue lighten-1">
-    <h3 class="display-4 left hide-on-med-and-down"> Biblioteca Setorial - IC</h3>
-    <ul class="right hide-on-med-and-down">
-      <li> <a routerLink="/"> Home </a> </li>
-      <li> <a routerLink="/data" > Dados </a> </li>
-      <li> <a> Home2 </a> </li>
-      <li> <a routerLink="/login" > Login </a> </li>
-    </ul>
-  </div>
-</nav>
+<mat-toolbar color="primary">
+  <img src="../../assets/images/LogoDIACOM.png" height="60px">
+  <button mat-button routerLink="/">Home</button>
+  <button mat-button routerLink="/doacao">Doação</button>
+  <button mat-button routerLink="/sobre">Sobre</button>
+
+  <mat-form-field class="search-bar" [floatLabel]="'never'" color="warn">
+    <input matInput placeholder="Procurar" type="search">
+  </mat-form-field>
+  <button mat-button><mat-icon>search</mat-icon></button>
+
+  <button mat-button routerLink="/login" class="login">Login</button>
+</mat-toolbar>

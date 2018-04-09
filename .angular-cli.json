@@ -19,8 +19,7 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css",
-        "../node_modules/materialize-css/dist/css/materialize.css",
+        "styles.scss",
         "../node_modules/tether/dist/css/tether.min.css",
         "../node_modules/bootstrap/dist/css/bootstrap.min.css"
       ],
@@ -29,8 +28,7 @@
         "../node_modules/tether/dist/js/tether.min.js",
         "../node_modules/bootstrap/dist/js/bootstrap.min.js",
         "../node_modules/jquery/dist/jquery.js",
-        "../node_modules/hammerjs/hammer.js",
-        "../node_modules/materialize-css/dist/js/materialize.js"
+        "../node_modules/hammerjs/hammer.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
@@ -64,7 +62,8 @@
     }
   },
   "defaults": {
-    "styleExt": "css",
-    "component": {}
+    "styleExt": "scss",
+    "component": {
+    }
   }
 }
