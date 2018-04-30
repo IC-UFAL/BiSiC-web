@@ -4,10 +4,17 @@
   <button mat-button routerLink="/doacao">Doação</button>
   <button mat-button routerLink="/sobre">Sobre</button>
 
-  <mat-form-field class="search-bar" [floatLabel]="'never'" color="warn">
-    <input matInput placeholder="Procurar" type="search">
-  </mat-form-field>
-  <button mat-button><mat-icon>search</mat-icon></button>
+  <div class="input-group search-bar">
+    <input type="text" class="form-control" placeholder="Buscar" aria-describedby="search">
+    <div class="input-group-append btn-search">
+      <span class="input-group-text" id="search"><i class="fa fa-search" aria-hidden="true"></i></span>
+    </div>
+  </div>
 
-  <button mat-button routerLink="/login" class="login">Login</button>
+  <button mat-button routerLink="/login" class="login" *ngIf="!isLogged()">Login</button>
+  <button mat-button class="login" [matMenuTriggerFor]="menu" *ngIf="isLogged()">Conta</button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="/dados">Detalhes</button>
+    <button mat-menu-item (click)="logout()">Logout</button>
+  </mat-menu>
 </mat-toolbar>

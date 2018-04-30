@@ -1,0 +1,36 @@
+.form-container {
+  min-width: 800px;
+  max-width: 1000px;
+  width: 50%;
+  margin: 20px auto 0 auto;
+  padding-top: 20px;
+
+  img {
+    min-height: 256px;
+    max-height: 256px;
+    max-width: 256px;
+  }
+
+  > * {
+    display: inline-block;
+  }
+
+  > form {
+    padding: 20px;
+    position: absolute;
+    top: 0;
+
+    button {
+      display: block;
+    }
+  }
+}
+
+mat-card.profile-pic {
+  min-width: 304px;
+  max-width: 304px;
+  * {
+    margin: 0;
+    display: block;
+  }
+}

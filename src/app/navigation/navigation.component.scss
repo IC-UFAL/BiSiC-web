@@ -2,10 +2,13 @@ mat-toolbar button {
   font-weight: bold;
 }
 
-button.login {
-  margin: 0 0 0 auto;
-}
-
 .search-bar {
   flex: 1;
+  max-width: 600px;
+  min-width: 200px;
+  margin: 0 auto;
+}
+
+.btn-search {
+  cursor: pointer;
 }

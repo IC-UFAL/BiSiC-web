@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { DataService } from './data.service';
+import {User} from '../shared/models/user';
+import {AuthenticationService} from '../shared/authentication.service';
 
 @Component({
   selector: 'app-data',
@@ -7,20 +8,20 @@ import { DataService } from './data.service';
   styleUrls: ['./data.component.scss']
 })
 export class DataComponent {
-  v: any;
+  user: User;
+  picture: string;
 
-  constructor(private dataService: DataService) {
-    console.log('Chamou');
-    this.dataService.getUser().subscribe(
-      (data: any) => {
-        console.log(data);
-        this.v = data;
-      } ,
-      error => {
-        alert('Erro em Data!');
-        console.log(error);
-      }
-    );
+  constructor(private authService: AuthenticationService) {
+    this.user = this.authService.getLoggedUser();
+    this.picture = this.user.profile_pic;
   }
 
+  save() {
+    this.authService.updateUser(this.user).subscribe((data: User) => {
+        this.picture = data.profile_pic;
+        console.log('mudou a foto');
+      },
+        err => console.log(err)
+    );
+  }
 }
