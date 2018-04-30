@@ -29,7 +29,6 @@ export class AuthenticationService {
     ret.subscribe((data: any) => {
       localStorage.setItem('token', data.token);
       this.user = data.user;
-      console.log('service register', this.user);
     }, error => console.log(error));
     return ret;
   }

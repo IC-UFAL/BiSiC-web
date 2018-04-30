@@ -23,9 +23,15 @@ export class NavigationComponent {
     return this.authService.isLogged();
   }
 
-  onSearch() {
+  onSearch(event?) {
+    if (event !== undefined) {
+      if (event.key !== 'Enter') {
+        return;
+      }
+    }
+
     if (this.searchTerm && this.searchTerm.length > 0) {
-      this.router.navigate(['/buscar', this.searchTerm])
+      this.router.navigate(['/buscar', this.searchTerm]);
     }
   }
 }

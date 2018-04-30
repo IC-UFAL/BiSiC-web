@@ -19,7 +19,6 @@ export class DataComponent {
   save() {
     this.authService.updateUser(this.user).subscribe((data: User) => {
         this.picture = data.profile_pic;
-        console.log('mudou a foto');
       },
         err => console.log(err)
     );

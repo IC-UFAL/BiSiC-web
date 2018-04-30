@@ -1,17 +1,22 @@
 <div class="content-container">
-  <mat-card>
-    <mat-card-title class="search-term">
+  <!--<mat-card>-->
+    <h1 class="search-term">
       <i class="fa fa-search" aria-hidden="true"></i> Buscando por "{{ searchTerm }}"...
-    </mat-card-title>
+    </h1>
 
     <mat-card class="book">
       <mat-card-header>
-        <img class="book-cover" mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+        <img class="book-cover" mat-card-image routerLink=""
+             src="https://images-na.ssl-images-amazon.com/images/I/510c3Td59TL._SY344_BO1,204,203,200_.jpg">
       </mat-card-header>
 
-      <h2 class="book-title"><a routerLink="">Cálculo</a></h2>
-      <span class="book-volume">Volume 1</span>
-      <span class="book-author">James Stweart</span>
+      <mat-card-content>
+        <h2 class="book-title">
+          <a routerLink="">Cálculo</a>
+          <span class="book-volume">Volume 1</span>
+        </h2>
+        <span class="book-author">James Stewart</span>
+      </mat-card-content>
     </mat-card>
-  </mat-card>
+  <!--</mat-card>-->
 </div>

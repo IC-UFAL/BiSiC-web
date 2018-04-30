@@ -1,10 +1,17 @@
+.content-container {
+  text-align: center;
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+}
+
 mat-card {
   padding: 18px;
 }
 
-mat-card-title.search-term {
+h1.search-term {
   color: #888;
   text-align: center;
+  font-size: 24px;
+  margin-bottom: 10px;
 }
 
 ::ng-deep div.mat-card-header-text {
@@ -12,11 +19,12 @@ mat-card-title.search-term {
 }
 
 img.book-cover {
+  display: block;
   box-shadow: 1px 1px 4px 0 #888888;
-  margin: 0;
-  max-height: 204px;
-  max-width: 204px;
   margin: auto;
+  height: 204px;
+  width: auto;
+  cursor: pointer;
 }
 
 mat-card.book {
@@ -24,7 +32,16 @@ mat-card.book {
   display: inline-block;
   margin: 5px;
 
-  .book-volume,
+  mat-card-content {
+    padding-top: 10px;
+    text-align: left;
+  }
+
+  .book-title,
+  .book-volume {
+    display: inline-block;
+  }
+
   .book-author {
     display: block;
   }
@@ -35,14 +52,17 @@ mat-card.book {
 
     a {
       text-decoration: none;
+      font-weight: bold;
+      color: #f44336;
     }
   }
 
   .book-volume {
-    font-size: 15px;
+    font-size: 13px;
+    color: #666;
   }
 
   .book-author {
-    font-size: 20px;
+    font-size: 18px;
   }
 }
