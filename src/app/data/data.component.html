@@ -18,7 +18,9 @@
         <input matInput placeholder="Sobrenome" name="lastName" [(ngModel)]="user.last_name">
       </mat-form-field>
       <mat-form-field>
+        <span matPrefix>+55 &nbsp;</span>
         <input matInput placeholder="Telefone" name="phone" [(ngModel)]="user.phone">
+        <mat-icon matSuffix>phone</mat-icon>
       </mat-form-field>
 
       <button mat-raised-button color="warn" (click)="save()">Salvar</button>

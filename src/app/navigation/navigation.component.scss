@@ -7,8 +7,13 @@ mat-toolbar button {
   max-width: 600px;
   min-width: 200px;
   margin: 0 auto;
+  padding: 0 16px;
 }
 
 .btn-search {
   cursor: pointer;
+}
+
+img {
+  padding-right: 16px;
 }

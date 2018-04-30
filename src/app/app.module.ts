@@ -10,8 +10,8 @@ import {
   MatCardModule, MatExpansionModule,
   MatFormFieldModule,
   MatIconModule,
-  MatInputModule,
-  MatMenuModule, MatTabsModule,
+  MatInputModule, MatListModule,
+  MatMenuModule, MatProgressBarModule, MatTabsModule,
   MatToolbarModule
 } from '@angular/material';
 import {MatCheckboxModule} from '@angular/material/checkbox';
@@ -23,12 +23,13 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { AuthenticationService } from './shared/authentication.service';
 import { DataComponent } from './data/data.component';
-import { BookComponent } from './book/book.component';
-import { BookService } from './book/book.service';
+import { NominalBookComponent } from './book/nominal-book.component';
+import { BookService } from './book/shared/book.service';
 import { AuthGuard } from './shared/auth.guard';
 import { AboutComponent } from './about/about.component';
 import { DonationComponent } from './donation/donation.component';
 import { UserResolver } from './shared/user.resolver';
+import { SearchComponent } from './search/search.component';
 
 const APP_ROUTES: Routes = [
   { path: '',
@@ -47,6 +48,8 @@ const APP_ROUTES: Routes = [
         component: DataComponent,
         canActivate: [AuthGuard]
       },
+      { path: 'buscar/:termo', component: SearchComponent },
+      { path: 'livro/:cod', component: NominalBookComponent },
       { path: '' , component: HomeComponent }
     ]
   }
@@ -62,9 +65,10 @@ export const routing: ModuleWithProviders = RouterModule.forRoot(APP_ROUTES);
     HomeComponent,
     LoginComponent,
     DataComponent,
-    BookComponent,
+    NominalBookComponent,
     AboutComponent,
-    DonationComponent
+    DonationComponent,
+    SearchComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -81,7 +85,9 @@ export const routing: ModuleWithProviders = RouterModule.forRoot(APP_ROUTES);
     MatIconModule,
     MatExpansionModule,
     MatCheckboxModule,
-    MatTabsModule
+    MatTabsModule,
+    MatListModule,
+    MatProgressBarModule
   ],
   providers: [AuthenticationService, BookService, AuthGuard, UserResolver],
   bootstrap: [AppComponent]

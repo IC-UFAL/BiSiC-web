@@ -8,6 +8,8 @@ import {Router} from '@angular/router';
   styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent {
+  searchTerm: string;
+
   constructor(private authService: AuthenticationService,
               private router: Router) { }
 
@@ -19,5 +21,17 @@ export class NavigationComponent {
 
   isLogged() {
     return this.authService.isLogged();
+  }
+
+  onSearch(event?) {
+    if (event !== undefined) {
+      if (event.key !== 'Enter') {
+        return;
+      }
+    }
+
+    if (this.searchTerm && this.searchTerm.length > 0) {
+      this.router.navigate(['/buscar', this.searchTerm]);
+    }
   }
 }

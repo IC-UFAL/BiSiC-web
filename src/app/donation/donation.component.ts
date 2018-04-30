@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Donation } from '../shared/models/donation';
 import { FormControl, Validators } from '@angular/forms';
+import {AuthenticationService} from '../shared/authentication.service';
 
 @Component({
   selector: 'app-donation',
@@ -12,11 +13,15 @@ export class DonationComponent {
 
   titleControl = new FormControl('', [Validators.required]);
 
-  constructor() {
+  constructor(private authService: AuthenticationService) {
     this.donation = new Donation();
   }
 
   send() {
     console.log('Doação enviada');
+  }
+
+  isLogged() {
+    return this.authService.isLogged();
   }
 }
