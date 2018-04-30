@@ -1,5 +1,5 @@
 <div class="form-container">
-  <mat-card>
+  <mat-card *ngIf="isLogged()">
     <mat-card-title>Doação</mat-card-title>
 
     <mat-form-field>
@@ -13,5 +13,13 @@
     <mat-card-footer>
       <button mat-raised-button color="warn" (click)="send()">Enviar</button>
     </mat-card-footer>
+  </mat-card>
+
+  <mat-card *ngIf="!isLogged()">
+    <mat-error>
+      <i class="material-icons">warning</i>
+      Você precisa fazer <a routerLink="/login">login</a> para fazer uma doação.
+      <i class="material-icons">warning</i>
+    </mat-error>
   </mat-card>
 </div>
