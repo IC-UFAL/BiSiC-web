@@ -13,13 +13,13 @@ mat-toolbar {
   font-weight: bold;
 }
 
-.content-container {
+.app-container {
   flex: 1;
   overflow: auto;
   background-color: rgba(230, 230, 255, 0.51);
 }
 
-::ng-deep .content-container *:first-child {
+::ng-deep .app-container *:first-child {
   min-height: calc(100% - 35px);
 }
 

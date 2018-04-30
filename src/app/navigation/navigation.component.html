@@ -5,9 +5,12 @@
   <button mat-button routerLink="/sobre">Sobre</button>
 
   <div class="input-group search-bar">
-    <input type="text" class="form-control" placeholder="Buscar" aria-describedby="search">
+    <input type="text" class="form-control" placeholder="Buscar" aria-describedby="search"
+           [(ngModel)]="searchTerm">
     <div class="input-group-append btn-search">
-      <span class="input-group-text" id="search"><i class="fa fa-search" aria-hidden="true"></i></span>
+      <span class="input-group-text" id="search" (click)="onSearch()">
+        <i class="fa fa-search" aria-hidden="true"></i>
+      </span>
     </div>
   </div>
 

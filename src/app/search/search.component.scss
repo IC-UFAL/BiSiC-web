@@ -1,0 +1,48 @@
+mat-card {
+  padding: 18px;
+}
+
+mat-card-title.search-term {
+  color: #888;
+  text-align: center;
+}
+
+::ng-deep div.mat-card-header-text {
+  margin: 0;
+}
+
+img.book-cover {
+  box-shadow: 1px 1px 4px 0 #888888;
+  margin: 0;
+  max-height: 204px;
+  max-width: 204px;
+  margin: auto;
+}
+
+mat-card.book {
+  width: 240px;
+  display: inline-block;
+  margin: 5px;
+
+  .book-volume,
+  .book-author {
+    display: block;
+  }
+
+  h2.book-title{
+    margin: 0;
+    font-size: 20px;
+
+    a {
+      text-decoration: none;
+    }
+  }
+
+  .book-volume {
+    font-size: 15px;
+  }
+
+  .book-author {
+    font-size: 20px;
+  }
+}

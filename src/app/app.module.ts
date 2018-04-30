@@ -10,7 +10,7 @@ import {
   MatCardModule, MatExpansionModule,
   MatFormFieldModule,
   MatIconModule,
-  MatInputModule,
+  MatInputModule, MatListModule,
   MatMenuModule, MatTabsModule,
   MatToolbarModule
 } from '@angular/material';
@@ -29,6 +29,7 @@ import { AuthGuard } from './shared/auth.guard';
 import { AboutComponent } from './about/about.component';
 import { DonationComponent } from './donation/donation.component';
 import { UserResolver } from './shared/user.resolver';
+import { SearchComponent } from './search/search.component';
 
 const APP_ROUTES: Routes = [
   { path: '',
@@ -47,6 +48,7 @@ const APP_ROUTES: Routes = [
         component: DataComponent,
         canActivate: [AuthGuard]
       },
+      { path: 'buscar/:termo', component: SearchComponent },
       { path: '' , component: HomeComponent }
     ]
   }
@@ -64,7 +66,8 @@ export const routing: ModuleWithProviders = RouterModule.forRoot(APP_ROUTES);
     DataComponent,
     BookComponent,
     AboutComponent,
-    DonationComponent
+    DonationComponent,
+    SearchComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -81,7 +84,8 @@ export const routing: ModuleWithProviders = RouterModule.forRoot(APP_ROUTES);
     MatIconModule,
     MatExpansionModule,
     MatCheckboxModule,
-    MatTabsModule
+    MatTabsModule,
+    MatListModule
   ],
   providers: [AuthenticationService, BookService, AuthGuard, UserResolver],
   bootstrap: [AppComponent]
