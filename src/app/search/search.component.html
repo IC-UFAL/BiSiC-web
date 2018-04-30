@@ -4,19 +4,24 @@
       <i class="fa fa-search" aria-hidden="true"></i> Buscando por "{{ searchTerm }}"...
     </h1>
 
-    <mat-card class="book">
+    <mat-card class="book" *ngFor="let book of searchResults">
       <mat-card-header>
-        <img class="book-cover" mat-card-image routerLink=""
-             src="https://images-na.ssl-images-amazon.com/images/I/510c3Td59TL._SY344_BO1,204,203,200_.jpg">
+        <img class="book-cover" mat-card-image routerLink="/livro/{{ book.cod }}"
+             src="{{ book.cover }}">
       </mat-card-header>
 
       <mat-card-content>
         <h2 class="book-title">
-          <a routerLink="">Cálculo</a>
-          <span class="book-volume">Volume 1</span>
+          <a routerLink="">{{ book.title }}</a>
+          <span class="book-volume">{{ book.volume }}</span>
         </h2>
-        <span class="book-author">James Stewart</span>
+        <span class="book-edition">{{ book.edition }}</span>
+        <span class="book-author">{{ book.author }}</span>
       </mat-card-content>
     </mat-card>
+
+  <span class="no-results" *ngIf="searchResults.length === 0">
+    😢 Nenhum livro encontrado.
+  </span>
   <!--</mat-card>-->
 </div>

@@ -1,0 +1,106 @@
+mat-card {
+  display: flex;
+}
+
+.book-cover {
+  display: inline-block;
+  //max-height: 512px;
+  //max-width: 50%;
+  //width: auto;
+  //height: auto;
+  width: 40%;
+
+  img {
+    box-shadow: 1px 1px 4px 0 #888888;
+    margin: 0;
+    position: relative;
+    max-width: 100%;
+    max-height: 100%;
+  }
+}
+
+div.book-info {
+  display: inline-block;
+  margin-left: 20px;
+  flex: 1;
+
+  mat-divider {
+    position: relative;
+    margin: 10px 0;
+  }
+}
+
+h2.book-title,
+span.book-edition,
+span.book-author {
+  display: block;
+}
+
+h2.book-title {
+  min-height: 0;
+  color: #f44336;
+  font-size: 36px;
+  font-weight: bold;
+  margin: 0;
+
+  span.book-volume {
+    color: #666;
+    font-size: 20px;
+    font-weight: normal;
+  }
+}
+
+span.book-edition {
+  font-weight: bold;
+  font-size: 17px;
+}
+
+span.book-author {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+span.book-description {
+  display: block;
+  padding-top: 15px;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+mat-card-footer {
+  text-align: center;
+
+  button {
+    margin: 15px auto;
+  }
+}
+
+.half-width {
+  display: inline-block;
+  width: 48%;
+}
+
+div.disponibility {
+  color: darkblue;
+  font-size: 20px;
+  font-weight: bold;
+
+  mat-progress-bar {
+    margin-top: 10px;
+  }
+
+  span {
+    display: block;
+    font-size: 18px;
+  }
+
+  .available {
+    color: darkgreen;
+  }
+
+  .not-available {
+    color: darkred;
+  }
+}

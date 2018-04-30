@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+import {NominalBook} from '../book/shared/book.model';
 
 @Component({
   selector: 'app-search',
@@ -8,6 +9,7 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class SearchComponent implements OnInit {
   searchTerm: string;
+  searchResults: NominalBook[] = [];
 
   constructor(private route: ActivatedRoute) {
     this.route.params.subscribe(params => {
