@@ -3,12 +3,16 @@
     <mat-card-title>Doação</mat-card-title>
 
     <mat-form-field>
-      <input matInput placeholder="Título do livro" [(ngModel)]="donation.bookTitle"
+      <input matInput placeholder="Título do livro" [(ngModel)]="donation.book_title"
               required>
       <mat-error *ngIf="titleControl.invalid">
         Este campo não pode estar vazio.
       </mat-error>
     </mat-form-field>
+
+    <mat-error *ngIf="error">
+      *Algo deu errado.
+    </mat-error>
 
     <mat-card-footer>
       <button mat-raised-button color="warn" (click)="send()">Enviar</button>

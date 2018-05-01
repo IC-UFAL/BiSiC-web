@@ -1,0 +1,56 @@
+<div class="content-container">
+  <mat-card *ngIf="!isLoading && !hasError['cod']">
+    <mat-card-title>
+      Criar novo livro
+      <mat-divider></mat-divider>
+    </mat-card-title>
+
+    <mat-card-content class="content">
+      <div class="book-cover">
+        <mat-form-field>
+          <input matInput placeholder="Capa" required [(ngModel)]="editBook.cover">
+        </mat-form-field>
+
+        <img mat-card-image src="{{ editBook.cover ? editBook.cover : 'https://i.imgur.com/zHuL6kO.png' }}">
+      </div>
+
+      <div class="book-info">
+        <mat-form-field class="book-title">
+          <input matInput placeholder="Título" required [(ngModel)]="editBook.title">
+        </mat-form-field>
+
+        <mat-form-field class="book-volume">
+          <input matInput type="number" placeholder="Volume" [(ngModel)]="editBook.volume">
+        </mat-form-field>
+
+        <mat-form-field class="book-edition">
+          <input matInput type="number" placeholder="Edição" required [(ngModel)]="editBook.edition">
+        </mat-form-field>
+
+        <mat-form-field class="book-author">
+          <input matInput placeholder="Autor" required [(ngModel)]="editBook.author">
+        </mat-form-field>
+
+        <mat-form-field>
+          <textarea matInput placeholder="Descrição" required [(ngModel)]="editBook.description"></textarea>
+        </mat-form-field>
+
+        <mat-error *ngIf="hasError">
+          *Algo deu errado.
+        </mat-error>
+
+        <button mat-raised-button color="warn" (click)="save()">Salvar</button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="edit-error" *ngIf="!isLoading && hasError['cod']">
+    <mat-error>
+      <i class="material-icons">warning</i>
+      Algo deu errado.
+      <i class="material-icons">warning</i>
+    </mat-error>
+  </mat-card>
+
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+</div>

@@ -11,8 +11,8 @@ import {
   MatFormFieldModule,
   MatIconModule,
   MatInputModule, MatListModule,
-  MatMenuModule, MatProgressBarModule, MatTabsModule,
-  MatToolbarModule
+  MatMenuModule, MatProgressBarModule, MatProgressSpinnerModule, MatTabsModule,
+  MatToolbarModule, MatTooltipModule
 } from '@angular/material';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
@@ -30,9 +30,16 @@ import { AboutComponent } from './about/about.component';
 import { DonationComponent } from './donation/donation.component';
 import { UserResolver } from './shared/user.resolver';
 import { SearchComponent } from './search/search.component';
+import { NewOrEditNominalBookComponent } from './book/new-or-edit-nominal-book/new-or-edit-nominal-book.component';
+import { NotificationsComponent } from './notifications/notifications.component';
+import { DonationsComponent } from './notifications/donations/donations.component';
+import {DonationsService} from './notifications/donations/donations.service';
+import { LocationsComponent } from './notifications/locations/locations.component';
+import {UserService} from './shared/user.service';
 
 const APP_ROUTES: Routes = [
-  { path: '',
+  {
+    path: '',
     resolve: {
       user: UserResolver
     },
@@ -49,7 +56,20 @@ const APP_ROUTES: Routes = [
         canActivate: [AuthGuard]
       },
       { path: 'buscar/:termo', component: SearchComponent },
-      { path: 'livro/:cod', component: NominalBookComponent },
+      {
+        path: 'livro',
+        children: [
+          { path: 'novo', component: NewOrEditNominalBookComponent },
+          {
+            path: ':cod',
+            children: [
+              {path: 'editar', component: NewOrEditNominalBookComponent },
+              {path: '', component: NominalBookComponent }
+            ]
+          }
+        ]
+      },
+      { path: 'notificacoes', component: NotificationsComponent },
       { path: '' , component: HomeComponent }
     ]
   }
@@ -68,7 +88,11 @@ export const routing: ModuleWithProviders = RouterModule.forRoot(APP_ROUTES);
     NominalBookComponent,
     AboutComponent,
     DonationComponent,
-    SearchComponent
+    SearchComponent,
+    NewOrEditNominalBookComponent,
+    NotificationsComponent,
+    DonationsComponent,
+    LocationsComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -87,9 +111,11 @@ export const routing: ModuleWithProviders = RouterModule.forRoot(APP_ROUTES);
     MatCheckboxModule,
     MatTabsModule,
     MatListModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatTooltipModule,
+    MatProgressSpinnerModule
   ],
-  providers: [AuthenticationService, BookService, AuthGuard, UserResolver],
+  providers: [AuthenticationService, BookService, AuthGuard, UserResolver, DonationsService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -34,4 +34,8 @@ export class NavigationComponent {
       this.router.navigate(['/buscar', this.searchTerm]);
     }
   }
+
+  hasNotification() {
+    return true;
+  }
 }

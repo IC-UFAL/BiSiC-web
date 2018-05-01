@@ -1,17 +1,17 @@
 <div class="content-container">
-  <mat-card>
+  <mat-card class="content" *ngIf="!loading && nominalBook !== undefined">
     <div class="book-cover">
-      <img mat-card-image src="https://spark.adobe.com/images/landing/examples/architecture-book-cover.jpg">
+      <img mat-card-image src="{{ nominalBook.cover }}">
     </div>
 
     <div class="book-info">
       <h2 class="book-title">
-        Cálculo
-        <span class="book-volume">Volume 1</span>
+        {{ nominalBook.title }}
+        <span class="book-volume" *ngIf="nominalBook.volume !== null">Volume {{ nominalBook.volume }}</span>
       </h2>
-      <span class="book-edition">7ª edição</span>
-      <span class="book-author">James Stewart</span>
-      <span class="book-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</span>
+      <span class="book-edition">{{ nominalBook.edition }}ª edição</span>
+      <span class="book-author">{{ nominalBook.author }}</span>
+      <span class="book-description">{{ nominalBook.description }}</span>
       <mat-divider></mat-divider>
       <div class="disponibility">
         Disponibilidade
@@ -23,7 +23,19 @@
         <span class="not-available">
           <i class="fa fa-minus-circle"></i> Não disponível
         </span>
+
+        <button mat-raised-button color="warn" routerLink="./editar">Editar</button>
       </div>
     </div>
   </mat-card>
+
+  <mat-card *ngIf="!loading && nominalBook === undefined">
+    <mat-error>
+      <i class="material-icons">warning</i>
+      Algo deu errado.
+      <i class="material-icons">warning</i>
+    </mat-error>
+  </mat-card>
+
+  <mat-spinner *ngIf="loading"></mat-spinner>
 </div>
