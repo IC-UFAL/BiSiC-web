@@ -31,6 +31,11 @@ import { DonationComponent } from './donation/donation.component';
 import { UserResolver } from './shared/user.resolver';
 import { SearchComponent } from './search/search.component';
 import { NewOrEditNominalBookComponent } from './book/new-or-edit-nominal-book/new-or-edit-nominal-book.component';
+import { NotificationsComponent } from './notifications/notifications.component';
+import { DonationsComponent } from './notifications/donations/donations.component';
+import {DonationsService} from './notifications/donations/donations.service';
+import { LocationsComponent } from './notifications/locations/locations.component';
+import {UserService} from './shared/user.service';
 
 const APP_ROUTES: Routes = [
   {
@@ -64,6 +69,7 @@ const APP_ROUTES: Routes = [
           }
         ]
       },
+      { path: 'notificacoes', component: NotificationsComponent },
       { path: '' , component: HomeComponent }
     ]
   }
@@ -83,7 +89,10 @@ export const routing: ModuleWithProviders = RouterModule.forRoot(APP_ROUTES);
     AboutComponent,
     DonationComponent,
     SearchComponent,
-    NewOrEditNominalBookComponent
+    NewOrEditNominalBookComponent,
+    NotificationsComponent,
+    DonationsComponent,
+    LocationsComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -106,7 +115,7 @@ export const routing: ModuleWithProviders = RouterModule.forRoot(APP_ROUTES);
     MatTooltipModule,
     MatProgressSpinnerModule
   ],
-  providers: [AuthenticationService, BookService, AuthGuard, UserResolver],
+  providers: [AuthenticationService, BookService, AuthGuard, UserResolver, DonationsService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

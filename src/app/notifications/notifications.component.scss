@@ -1,0 +1,17 @@
+::ng-deep mat-card.notifications {
+  div.mat-tab-body-content {
+    height: auto;
+  }
+
+  mat-tab-header {
+    background-color: white;
+  }
+
+  mat-expansion-panel {
+    background-color: #fff0e0;
+
+    &.closed {
+      background-color: #e0ffe0;
+    }
+  }
+}

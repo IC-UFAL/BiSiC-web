@@ -1,0 +1,18 @@
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let donation of donations; let i = index" [class.closed]="donation.closed">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{ donation.book_title }}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{ donation.closed ? 'Concretizada' : 'Em aberto' }}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-checkbox color="warn" [(ngModel)]="donation.closed" (ngModelChange)="onChange(i, donation)">Concretizar!</mat-checkbox>
+
+    <mat-error *ngIf="error[i]">
+      *Algo deu errado ao atualizar esta doação.
+    </mat-error>
+  </mat-expansion-panel>
+</mat-accordion>
