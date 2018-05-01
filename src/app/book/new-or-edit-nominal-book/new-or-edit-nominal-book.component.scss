@@ -1,0 +1,25 @@
+@import "../nominal-book.component";
+
+mat-card-title {
+  font-weight: bold;
+  text-align: center;
+}
+
+.book-edition,
+.book-volume {
+  width: 100px;
+  display: inline-block;
+}
+
+::ng-deep .book-title {
+  font-size: 24px !important;
+
+  div.mat-input-infix.mat-form-field-infix {
+    padding-bottom: 0;
+  }
+}
+
+mat-card.edit-error {
+  text-align: center;
+}
+

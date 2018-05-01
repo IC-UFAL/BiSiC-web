@@ -11,7 +11,7 @@ import {
   MatFormFieldModule,
   MatIconModule,
   MatInputModule, MatListModule,
-  MatMenuModule, MatProgressBarModule, MatTabsModule,
+  MatMenuModule, MatProgressBarModule, MatProgressSpinnerModule, MatTabsModule,
   MatToolbarModule, MatTooltipModule
 } from '@angular/material';
 import {MatCheckboxModule} from '@angular/material/checkbox';
@@ -30,6 +30,7 @@ import { AboutComponent } from './about/about.component';
 import { DonationComponent } from './donation/donation.component';
 import { UserResolver } from './shared/user.resolver';
 import { SearchComponent } from './search/search.component';
+import { NewOrEditNominalBookComponent } from './book/new-or-edit-nominal-book/new-or-edit-nominal-book.component';
 
 const APP_ROUTES: Routes = [
   {
@@ -50,7 +51,19 @@ const APP_ROUTES: Routes = [
         canActivate: [AuthGuard]
       },
       { path: 'buscar/:termo', component: SearchComponent },
-      { path: 'livro/:cod', component: NominalBookComponent },
+      {
+        path: 'livro',
+        children: [
+          { path: 'novo', component: NewOrEditNominalBookComponent },
+          {
+            path: ':cod',
+            children: [
+              {path: 'editar', component: NewOrEditNominalBookComponent },
+              {path: '', component: NominalBookComponent }
+            ]
+          }
+        ]
+      },
       { path: '' , component: HomeComponent }
     ]
   }
@@ -69,7 +82,8 @@ export const routing: ModuleWithProviders = RouterModule.forRoot(APP_ROUTES);
     NominalBookComponent,
     AboutComponent,
     DonationComponent,
-    SearchComponent
+    SearchComponent,
+    NewOrEditNominalBookComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -89,7 +103,8 @@ export const routing: ModuleWithProviders = RouterModule.forRoot(APP_ROUTES);
     MatTabsModule,
     MatListModule,
     MatProgressBarModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatProgressSpinnerModule
   ],
   providers: [AuthenticationService, BookService, AuthGuard, UserResolver],
   bootstrap: [AppComponent]
