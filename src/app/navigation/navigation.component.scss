@@ -17,3 +17,17 @@ mat-toolbar button {
 img {
   padding-right: 16px;
 }
+
+button.new i.fa.fa-bell::after {
+  content: '';
+  position: absolute;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  left: 20px;
+  top: 12px;
+  -moz-border-radius: 7.5px;
+  -webkit-border-radius: 7.5px;
+  border-radius: 7.5px;
+  background-color: #dc3545;
+}

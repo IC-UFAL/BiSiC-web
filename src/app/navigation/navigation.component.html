@@ -14,8 +14,13 @@
     </div>
   </div>
 
-  <button mat-button routerLink="/login" class="login" *ngIf="!isLogged()">Login</button>
-  <button mat-button class="login" [matMenuTriggerFor]="menu" *ngIf="isLogged()">Conta</button>
+  <button mat-icon-button routerLink="" matTooltip="Adicionar livro à biblioteca">
+    <i class="fa fa-plus"></i>
+  </button>
+  <button mat-icon-button routerLink="" matTooltip="Cadastrar nova locação"><i class="fa fa-book"></i></button>
+  <button mat-icon-button routerLink="" [class.new]="hasNotification()" matTooltip="Doações pendentes"><i class="fa fa-bell"></i></button>
+  <button mat-button routerLink="/login" *ngIf="!isLogged()">Login</button>
+  <button mat-button [matMenuTriggerFor]="menu" *ngIf="isLogged()">Conta</button>
   <mat-menu #menu="matMenu">
     <button mat-menu-item routerLink="/dados">Detalhes</button>
     <button mat-menu-item (click)="logout()">Logout</button>

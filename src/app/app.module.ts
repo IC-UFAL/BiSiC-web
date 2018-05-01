@@ -12,7 +12,7 @@ import {
   MatIconModule,
   MatInputModule, MatListModule,
   MatMenuModule, MatProgressBarModule, MatTabsModule,
-  MatToolbarModule
+  MatToolbarModule, MatTooltipModule
 } from '@angular/material';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
@@ -87,7 +87,8 @@ export const routing: ModuleWithProviders = RouterModule.forRoot(APP_ROUTES);
     MatCheckboxModule,
     MatTabsModule,
     MatListModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatTooltipModule
   ],
   providers: [AuthenticationService, BookService, AuthGuard, UserResolver],
   bootstrap: [AppComponent]
