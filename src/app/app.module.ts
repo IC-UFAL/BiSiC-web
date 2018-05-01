@@ -32,7 +32,8 @@ import { UserResolver } from './shared/user.resolver';
 import { SearchComponent } from './search/search.component';
 
 const APP_ROUTES: Routes = [
-  { path: '',
+  {
+    path: '',
     resolve: {
       user: UserResolver
     },

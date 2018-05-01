@@ -1,4 +1,4 @@
 export class Donation {
-  idUser: number;
-  bookTitle: string;
+  id_user: number;
+  book_title: string;
 }
