@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>Novo Livro de "{{ data.title }}"</h2>
+<mat-dialog-content>
+  <mat-form-field>
+    <input matInput placeholder="Código" required [(ngModel)]="code">
+  </mat-form-field>
+
+  <mat-error *ngIf="error">
+    *Algo deu errado.
+  </mat-error>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button color="accent" mat-dialog-close>Cancelar</button>
+  <button mat-raised-button color="accent" (click)="create()">Adicionar</button>
+</mat-dialog-actions>

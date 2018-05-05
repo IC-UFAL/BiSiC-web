@@ -13,4 +13,9 @@ export class UserService {
     const headers = new HttpHeaders({ Authorization: 'Bearer ' + this.authService.getToken()});
     return this.http.get<User>('http://localhost:8000/api/user/' + id + '/', { headers: headers });
   }
+
+  searchUser(term: string) {
+    const headers = new HttpHeaders({ Authorization: 'Bearer ' + this.authService.getToken()});
+    return this.http.get<User[]>('http://localhost:8000/api/user/?search=' + term, { headers: headers });
+  }
 }

@@ -1,0 +1,73 @@
+.form-container {
+  min-width: 300px;
+  max-width: 500px;
+  width: 50%;
+  margin: 0 auto;
+  padding-top: 20px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-card-footer {
+  text-align: center;
+
+  button {
+    margin: 15px auto;
+  }
+}
+
+mat-list {
+  padding: 0;
+
+  .progress-container {
+    padding: 1.5rem;
+  }
+
+  mat-list-item {
+    cursor: pointer;
+  }
+
+  mat-list-item:hover {
+    background-color: #d2d2d2;
+  }
+}
+
+.wrapper {
+  position: relative;
+}
+
+.popover {
+  border: none;
+  top: 80px;
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  transform: translate(0,10px);
+  background-color: #d8d8d8;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  width: -webkit-fill-available;
+}
+
+.popover:before {
+  position: absolute;
+  z-index: -1;
+  content: '';
+  top: -10px;
+  left: 10px;
+  border-style: solid;
+  border-width: 0 10px 10px 10px;
+  border-color: transparent transparent #d8d8d8 transparent;
+  transition-duration: 0.3s;
+  transition-property: transform;
+}
+
+.popover:hover,
+.popover.visible {
+  z-index: 10;
+  opacity: 1;
+  visibility: visible;
+  transform: translate(0,-20px);
+  transition: all 0.5s cubic-bezier(0.75, -0.02, 0.2, 0.97);
+}

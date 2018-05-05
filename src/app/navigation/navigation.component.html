@@ -17,7 +17,7 @@
   <button mat-icon-button routerLink="/livro/novo" matTooltip="Adicionar livro à biblioteca">
     <i class="fa fa-plus"></i>
   </button>
-  <button mat-icon-button routerLink="" matTooltip="Cadastrar nova locação"><i class="fa fa-book"></i></button>
+  <button mat-icon-button routerLink="/locacao/nova" matTooltip="Cadastrar nova locação"><i class="fa fa-book"></i></button>
   <button mat-icon-button routerLink="/notificacoes" [class.new]="hasNotification()" matTooltip="Doações e locações pendentes"><i class="fa fa-bell"></i></button>
   <button mat-button routerLink="/login" *ngIf="!isLogged()">Login</button>
   <button mat-button [matMenuTriggerFor]="menu" *ngIf="isLogged()">Conta</button>

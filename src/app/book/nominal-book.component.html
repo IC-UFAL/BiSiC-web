@@ -1,5 +1,5 @@
 <div class="content-container">
-  <mat-card class="content" *ngIf="!loading && nominalBook !== undefined">
+  <mat-card class="content" *ngIf="!isLoading && nominalBook !== undefined">
     <div class="book-cover">
       <img mat-card-image src="{{ nominalBook.cover }}">
     </div>
@@ -16,20 +16,21 @@
       <div class="disponibility">
         Disponibilidade
 
-        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-        <span class="available">
+        <mat-progress-bar mode="indeterminate" *ngIf="loadingAvailability"></mat-progress-bar>
+        <span class="available" *ngIf="!loadingAvailability && available">
           <i class="fa fa-check-circle"></i> Disponível
         </span>
-        <span class="not-available">
+        <span class="not-available" *ngIf="!loadingAvailability && !available">
           <i class="fa fa-minus-circle"></i> Não disponível
         </span>
 
         <button mat-raised-button color="warn" routerLink="./editar">Editar</button>
+        <button mat-raised-button color="accent" (click)="openNewInstanceDialog()"><i class="fa fa-plus-circle"></i> Adicionar instância</button>
       </div>
     </div>
   </mat-card>
 
-  <mat-card *ngIf="!loading && nominalBook === undefined">
+  <mat-card *ngIf="!isLoading && nominalBook === undefined">
     <mat-error>
       <i class="material-icons">warning</i>
       Algo deu errado.
@@ -37,5 +38,5 @@
     </mat-error>
   </mat-card>
 
-  <mat-spinner *ngIf="loading"></mat-spinner>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
 </div>

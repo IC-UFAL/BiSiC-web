@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {Donation} from '../../shared/models/donation';
 import {DonationsService} from './donations.service';
 import {UserService} from '../../shared/user.service';
+import {User} from '../../shared/models/user';
 
 @Component({
   selector: 'notifications-donations',
@@ -21,7 +22,7 @@ export class DonationsComponent {
 
       this.donations.forEach((donation) => {
         this.error.push(false);
-        // this.userService.getUser(donation.id_user).subscribe(user => donation['user'] = user);
+        this.userService.getUser(donation.id_user).subscribe(user => donation['user'] = user);
       });
     }, err => {
       console.log(err);
@@ -38,5 +39,17 @@ export class DonationsComponent {
       console.log(err);
       this.error[idx] = true;
     });
+  }
+
+  getUserName(user: User) {
+    if (user === undefined) {
+      return;
+    }
+
+    let fullName = user.first_name;
+    if (user.last_name) {
+      fullName += ' ' + user.last_name;
+    }
+    return fullName;
   }
 }

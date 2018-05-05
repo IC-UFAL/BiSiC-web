@@ -1,3 +1,24 @@
-<p>
-  locations works!
-</p>
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let loc of locations; let i = index" [class.closed]="isLate(loc)">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{ donation.book_title }}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{ donation.closed ? 'Concretizada' : 'Em aberto' }}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div class="user">
+      <span class="name">Doador: {{ getUserName(donation.user) }}</span>
+      <span class="email">E-mail: {{ donation.user?.email }}</span>
+      <span class="phone" *ngIf="donation.user?.phone">Telefone: {{ donation.user?.phone }}</span>
+    </div>
+
+    <mat-checkbox color="warn" [(ngModel)]="donation.closed" (ngModelChange)="onChange(i, donation)">Concretizar!</mat-checkbox>
+
+    <mat-error *ngIf="error[i]">
+      *Algo deu errado ao atualizar esta doação.
+    </mat-error>
+  </mat-expansion-panel>
+</mat-accordion>
