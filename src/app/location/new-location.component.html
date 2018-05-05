@@ -1,0 +1,47 @@
+<div class="form-container">
+  <mat-card>
+    <mat-card-title>Nova Locação</mat-card-title>
+
+    <div class="wrapper">
+      <mat-form-field class="popover__wrapper">
+        <input matInput placeholder="Aluno" required (focus)="onFocus('student')" (blur)="onBlur('student')"
+               [(ngModel)]="studentSearch" (ngModelChange)="onChange('student', $event)">
+      </mat-form-field>
+
+      <mat-list class="popover" [class.visible]="isVisible === 'student'">
+        <div class="progress-container" *ngIf="isLoading === 'student'">
+          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </div>
+
+        <mat-list-item *ngFor="let s of searchResponse['student']" (click)="selectStudent(s)">
+          {{ s.email }}
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </mat-list>
+    </div>
+
+    <div class="wrapper">
+      <mat-form-field class="popover__wrapper">
+        <input matInput placeholder="Livro" required (focus)="onFocus('book')" (blur)="onBlur('book')"
+               [(ngModel)]="bookSearch" (ngModelChange)="onChange('book', $event)">
+      </mat-form-field>
+
+      <mat-list class="popover" [class.visible]="isVisible === 'book'">
+        <div class="progress-container" *ngIf="isLoading === 'book'">
+          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </div>
+
+        <mat-list-item *ngFor="let b of searchResponse['book']" (click)="selectBook(b)">
+          {{ b.title }}
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </mat-list>
+    </div>
+
+    <mat-error *ngIf="error">*Algo deu errado.</mat-error>
+
+    <mat-card-footer>
+      <button mat-raised-button color="warn" (click)="send()">Finalizar</button>
+    </mat-card-footer>
+  </mat-card>
+</div>

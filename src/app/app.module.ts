@@ -7,7 +7,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import {
-  MatCardModule, MatExpansionModule,
+  MAT_DIALOG_DEFAULT_OPTIONS,
+  MatCardModule, MatDialog, MatDialogModule, MatExpansionModule,
   MatFormFieldModule,
   MatIconModule,
   MatInputModule, MatListModule,
@@ -23,7 +24,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { AuthenticationService } from './shared/authentication.service';
 import { DataComponent } from './data/data.component';
-import { NominalBookComponent } from './book/nominal-book.component';
+import {NewBookInstanceDialog, NominalBookComponent} from './book/nominal-book.component';
 import { BookService } from './book/shared/book.service';
 import { AuthGuard } from './shared/auth.guard';
 import { AboutComponent } from './about/about.component';
@@ -36,6 +37,8 @@ import { DonationsComponent } from './notifications/donations/donations.componen
 import {DonationsService} from './notifications/donations/donations.service';
 import { LocationsComponent } from './notifications/locations/locations.component';
 import {UserService} from './shared/user.service';
+import {LocationsService} from './notifications/locations/locations.service';
+import { NewLocationComponent } from './location/new-location.component';
 
 const APP_ROUTES: Routes = [
   {
@@ -69,6 +72,7 @@ const APP_ROUTES: Routes = [
           }
         ]
       },
+      { path: 'locacao/nova', component: NewLocationComponent },
       { path: 'notificacoes', component: NotificationsComponent },
       { path: '' , component: HomeComponent }
     ]
@@ -92,7 +96,9 @@ export const routing: ModuleWithProviders = RouterModule.forRoot(APP_ROUTES);
     NewOrEditNominalBookComponent,
     NotificationsComponent,
     DonationsComponent,
-    LocationsComponent
+    LocationsComponent,
+    NewLocationComponent,
+    NewBookInstanceDialog
   ],
   imports: [
     BrowserAnimationsModule,
@@ -113,9 +119,22 @@ export const routing: ModuleWithProviders = RouterModule.forRoot(APP_ROUTES);
     MatListModule,
     MatProgressBarModule,
     MatTooltipModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatDialogModule
   ],
-  providers: [AuthenticationService, BookService, AuthGuard, UserResolver, DonationsService, UserService],
+  entryComponents: [
+    NewBookInstanceDialog
+  ],
+  providers: [
+    AuthenticationService,
+    BookService,
+    AuthGuard,
+    UserResolver,
+    DonationsService,
+    UserService,
+    LocationsService,
+    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true} }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

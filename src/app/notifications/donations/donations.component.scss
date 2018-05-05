@@ -1,3 +1,18 @@
 mat-error {
   display: block;
 }
+
+.user {
+  display: block;
+  font-weight: bold;
+  font-size: 15px;
+  padding-bottom: 15px;
+
+  span {
+    display: block;
+  }
+}
+
+mat-checkbox {
+  margin-top: 10px;
+}

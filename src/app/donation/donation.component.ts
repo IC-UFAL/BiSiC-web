@@ -18,7 +18,9 @@ export class DonationComponent {
   constructor(private authService: AuthenticationService,
               private http: HttpClient) {
     this.donation = new Donation();
-    this.donation.id_user = this.authService.getLoggedUser().pk;
+    if (this.authService.isLogged()) {
+      this.donation.id_user = this.authService.getLoggedUser().pk;
+    }
   }
 
   send() {
