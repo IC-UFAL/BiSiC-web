@@ -3,6 +3,7 @@ import {Donation} from '../../shared/models/donation';
 import {DonationsService} from './donations.service';
 import {UserService} from '../../shared/user.service';
 import {User} from '../../shared/models/user';
+import {NotificationService} from '../shared/notification.service';
 
 @Component({
   selector: 'notifications-donations',
@@ -15,7 +16,8 @@ export class DonationsComponent {
   isLoading = true;
 
   constructor(private donationsService: DonationsService,
-              private userService: UserService) {
+              private userService: UserService,
+              private notificationService: NotificationService) {
     this.donationsService.getAllDonations().subscribe(data => {
       this.donations = data.sort((a, b) => a.closed ? 1 : 0);
       this.isLoading = false;
@@ -34,22 +36,16 @@ export class DonationsComponent {
     this.error[idx] = false;
 
     this.donationsService.updateDonation(donation)
-      .subscribe(() => {},
+      .subscribe(() => {
+          this.notificationService.notificationEmitter.emit(true);
+          },
           err => {
       console.log(err);
       this.error[idx] = true;
     });
   }
 
-  getUserName(user: User) {
-    if (user === undefined) {
-      return;
-    }
-
-    let fullName = user.first_name;
-    if (user.last_name) {
-      fullName += ' ' + user.last_name;
-    }
-    return fullName;
+  getUserFullName(user: User) {
+    return this.userService.getUserFullName(user);
   }
 }

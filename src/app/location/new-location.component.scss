@@ -20,6 +20,16 @@ mat-card-footer {
 
 mat-list {
   padding: 0;
+  display: block;
+
+  .cover,
+  .info {
+    display: inline-block;
+  }
+
+  .info {
+    padding-left: 10px;
+  }
 
   .progress-container {
     padding: 1.5rem;
@@ -27,10 +37,47 @@ mat-list {
 
   mat-list-item {
     cursor: pointer;
+    height: auto;
+    padding: 10px 0;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid darkgray;
+    }
+
+    .title {
+      display: block;
+      color: #f44336;
+      font-weight: bold;
+      font-size: 16px;
+
+      .volume {
+        color: #666666;
+        font-size: 14px;
+      }
+    }
+
+    .author {
+      display: block;
+      font-weight: bold;
+      font-size: 16px;
+    }
   }
 
   mat-list-item:hover {
     background-color: #d2d2d2;
+    border-radius: inherit;
+  }
+
+  img {
+    max-height: 64px;
+    max-width: 64px;
+    height: auto;
+    width: auto;
+    margin: 0;
+  }
+
+  mat-error {
+    padding: 15px;
   }
 }
 

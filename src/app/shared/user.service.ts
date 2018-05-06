@@ -18,4 +18,16 @@ export class UserService {
     const headers = new HttpHeaders({ Authorization: 'Bearer ' + this.authService.getToken()});
     return this.http.get<User[]>('http://localhost:8000/api/user/?search=' + term, { headers: headers });
   }
+
+  getUserFullName(user: User) {
+    if (user === undefined) {
+      return;
+    }
+
+    let fullName = user.first_name;
+    if (user.last_name) {
+      fullName += ' ' + user.last_name;
+    }
+    return fullName;
+  }
 }

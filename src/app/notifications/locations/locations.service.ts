@@ -18,4 +18,9 @@ export class LocationsService {
     const headers: HttpHeaders = new HttpHeaders({Authorization: 'Bearer ' + this.authService.getToken()});
     return this.http.post<Location>('http://localhost:8000/api/location/', location, { headers: headers });
   }
+
+  updateLocation(loc: Location) {
+    const headers: HttpHeaders = new HttpHeaders({Authorization: 'Bearer ' + this.authService.getToken()});
+    return this.http.put<Location>('http://localhost:8000/api/location/' + loc.id + '/', loc, { headers: headers });
+  }
 }

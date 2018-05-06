@@ -1,12 +1,12 @@
 <div class="content-container">
   <mat-card class="notifications">
-    <mat-tab-group>
+    <mat-tab-group #tabGroup (selectedIndexChange)="setControl()">
       <mat-tab label="Doações">
         <notifications-donations></notifications-donations>
       </mat-tab>
 
       <mat-tab label="Locações">
-        <notifications-locations></notifications-locations>
+        <notifications-locations *ngIf="controll"></notifications-locations>
       </mat-tab>
     </mat-tab-group>
   </mat-card>
