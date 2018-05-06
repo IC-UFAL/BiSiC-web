@@ -10,7 +10,7 @@
     </mat-expansion-panel-header>
 
     <div class="user">
-      <span class="name">Doador: {{ getUserName(donation.user) }}</span>
+      <span class="name">Doador: {{ getUserFullName(donation.user) }}</span>
       <span class="email">E-mail: {{ donation.user?.email }}</span>
       <span class="phone" *ngIf="donation.user?.phone">Telefone: {{ donation.user?.phone }}</span>
     </div>

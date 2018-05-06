@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {NominalBook} from './book.model';
+import {NominalBook, Book} from './book.model';
 import {AuthenticationService} from '../../shared/authentication.service';
 
 @Injectable()
@@ -15,8 +15,7 @@ export class BookService {
   }
 
   getNominalBook(cod: number) {
-    const headers: HttpHeaders = new HttpHeaders({Authorization: 'Bearer ' + this.authService.getToken()});
-    return this.httpClient.get<NominalBook>( 'http://localhost:8000/api/nominal_book/' + cod + '/',  {headers: headers});
+    return this.httpClient.get<NominalBook>( 'http://localhost:8000/api/nominal_book/' + cod + '/');
   }
 
   updateNominalBook(book: NominalBook) {
@@ -25,18 +24,30 @@ export class BookService {
   }
 
   searchNominalBook(term: string) {
-    const headers: HttpHeaders = new HttpHeaders({Authorization: 'Bearer ' + this.authService.getToken()});
-    return this.httpClient.get<NominalBook[]>( 'http://localhost:8000/api/nominal_book/?search=' + term, {headers: headers});
+    return this.httpClient.get<NominalBook[]>( 'http://localhost:8000/api/nominal_book/?search=' + term);
   }
 
   getNominalBookQuantity(cod: number) {
-    const headers: HttpHeaders = new HttpHeaders({Authorization: 'Bearer ' + this.authService.getToken()});
-    return this.httpClient.get<number>( 'http://localhost:8000/api/book_quantity/' + cod + '/',  {headers: headers});
+    return this.httpClient.get<number>( 'http://localhost:8000/api/available_book_quantity/' + cod + '/');
   }
 
   createBook(cod: number, codNominalBook: number) {
     const headers: HttpHeaders = new HttpHeaders({Authorization: 'Bearer ' + this.authService.getToken()});
     return this.httpClient.post( 'http://localhost:8000/api/book/', {cod: cod, cod_nominal_book: codNominalBook},
       {headers: headers});
+  }
+
+  getBooks(cod: number) {
+    const headers: HttpHeaders = new HttpHeaders({Authorization: 'Bearer ' + this.authService.getToken()});
+    return this.httpClient.get<Book[]>( 'http://localhost:8000/api/book/list/' + cod + '/', {headers: headers});
+  }
+
+  getBook(cod: string) {
+    const headers: HttpHeaders = new HttpHeaders({Authorization: 'Bearer ' + this.authService.getToken()});
+    return this.httpClient.get<Book>( 'http://localhost:8000/api/book/' + cod + '/', {headers: headers});
+  }
+
+  getTopNominalBooks() {
+    return this.httpClient.get<NominalBook[]>( 'http://localhost:8000/api/nominal_book_top10/');
   }
 }

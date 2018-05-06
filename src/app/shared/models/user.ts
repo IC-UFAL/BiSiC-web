@@ -6,6 +6,7 @@ export class User {
   password: string;
   phone: number;
   profile_pic: string;
+  is_DIACOM: boolean;
 }
 
 export class RegisterUser {

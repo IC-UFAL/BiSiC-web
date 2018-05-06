@@ -1,21 +1,20 @@
 <mat-accordion>
-  <mat-expansion-panel *ngFor="let loc of locations; let i = index" [class.closed]="isLate(loc)">
+  <mat-expansion-panel *ngFor="let loc of locations; let i = index" [class.late]="isLate(loc)" [class.closed]="loc.closed">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        {{ donation.book_title }}
+        [{{ loc.cod_book }}] {{ getBookTitle(loc.nomBook) }}
       </mat-panel-title>
       <mat-panel-description>
-        {{ donation.closed ? 'Concretizada' : 'Em aberto' }}
+        {{ getLocationStatus(loc) }}
       </mat-panel-description>
     </mat-expansion-panel-header>
 
-    <div class="user">
-      <span class="name">Doador: {{ getUserName(donation.user) }}</span>
-      <span class="email">E-mail: {{ donation.user?.email }}</span>
-      <span class="phone" *ngIf="donation.user?.phone">Telefone: {{ donation.user?.phone }}</span>
+    <div class="user" *ngIf="loc.user">
+      <span class="name">Em posse de: {{ getUserFullName(loc.user) }}</span>
+      <span class="email">E-mail: {{ loc.user?.email }}</span>
     </div>
 
-    <mat-checkbox color="warn" [(ngModel)]="donation.closed" (ngModelChange)="onChange(i, donation)">Concretizar!</mat-checkbox>
+    <mat-checkbox color="warn" [(ngModel)]="loc.closed" (ngModelChange)="onChange(i, loc)">Fechar locação</mat-checkbox>
 
     <mat-error *ngIf="error[i]">
       *Algo deu errado ao atualizar esta doação.

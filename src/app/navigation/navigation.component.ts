@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import {AuthenticationService} from '../shared/authentication.service';
 import {Router} from '@angular/router';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {NotificationService} from '../notifications/shared/notification.service';
 
 @Component({
   selector: 'app-navigation',
@@ -9,9 +11,17 @@ import {Router} from '@angular/router';
 })
 export class NavigationComponent {
   searchTerm: string;
+  hasNotification: boolean;
 
   constructor(private authService: AuthenticationService,
-              private router: Router) { }
+              private notificationService: NotificationService,
+              private router: Router,
+              private http: HttpClient) {
+    this.checkNotifications();
+    this.notificationService.notificationEmitter.subscribe(
+      () => this.checkNotifications()
+    );
+  }
 
   logout() {
     this.authService.logout().subscribe(() => {
@@ -35,7 +45,9 @@ export class NavigationComponent {
     }
   }
 
-  hasNotification() {
-    return true;
+  checkNotifications() {
+    const headers: HttpHeaders = new HttpHeaders({Authorization: 'Bearer ' + this.authService.getToken()});
+    this.http.get<boolean>( 'http://localhost:8000/api/has_notification/', {headers: headers})
+      .subscribe(data => this.hasNotification = data);
   }
 }

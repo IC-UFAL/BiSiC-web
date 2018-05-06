@@ -3,10 +3,11 @@ import { Component } from '@angular/core';
 import {UserService} from '../shared/user.service';
 import {User} from '../shared/models/user';
 import {Location} from '../shared/models/location.model';
-import {NominalBook} from '../book/shared/book.model';
+import {Book, NominalBook} from '../book/shared/book.model';
 import {BookService} from '../book/shared/book.service';
 import {LocationsService} from '../notifications/locations/locations.service';
 import {Router} from '@angular/router';
+import {NotificationService} from '../notifications/shared/notification.service';
 
 @Component({
   selector: 'app-location',
@@ -14,7 +15,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./new-location.component.scss']
 })
 export class NewLocationComponent {
-  location = new Location();
+  location: Location = new Location();
   studentSearch: any;
   bookSearch: any;
 
@@ -27,6 +28,7 @@ export class NewLocationComponent {
   constructor(private userService: UserService,
               private bookService: BookService,
               private locationsService: LocationsService,
+              private notificationService: NotificationService,
               private router: Router) { }
 
   onFocus(attr: string) {
@@ -60,7 +62,7 @@ export class NewLocationComponent {
           this.isLoading = undefined;
         });
       }, 3000);
-    } else if (attr === 'book') {
+    } else if (attr === 'nomBook') {
       this.timeout = setTimeout(() => {
         this.bookService.searchNominalBook(event).subscribe((data: NominalBook[]) => {
           this.searchResponse[attr] = data;
@@ -77,20 +79,32 @@ export class NewLocationComponent {
     this.isVisible = undefined;
   }
 
-  selectBook(book: NominalBook) {
-    this.location.cod_book = book.cod;
-    this.bookSearch = book.title;
+  selectBook(nomBook: NominalBook) {
+    this.bookSearch = nomBook.title;
     this.isVisible = undefined;
+
+    this.isLoading = 'book';
+    this.bookService.getBooks(nomBook.cod).subscribe((data: Book[]) => {
+      this.searchResponse['book'] = data.filter(book => book.available);
+      this.isLoading = undefined;
+    }, err => {
+      console.log(err);
+      this.isLoading = undefined;
+    });
   }
 
   send() {
-    console.log(this.location);
     this.error = false;
 
     this.locationsService.create(this.location).subscribe(() => {
       this.router.navigate(['/']);
+      this.notificationService.notificationEmitter.emit(true);
     }, err => {
       this.error = true;
     });
+  }
+
+  getUserFullName(student: User) {
+    return this.userService.getUserFullName(student);
   }
 }

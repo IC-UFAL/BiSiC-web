@@ -1,3 +1,23 @@
-<div class="card-title">
-  <p class="display-4"> A Biblioteca Setorial do Instito de Computação (BiSiC) é organizada pelo Diretório Academico de Computação (DIACOM) </p>
+<div class="content-container">
+  <h1 class="search-term">
+    <i class="fa fa-mouse-pointer" aria-hidden="true"></i> Livros mais requisitados
+  </h1>
+
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+
+  <mat-card class="book" *ngFor="let book of topBooks" [hidden]="isLoading">
+    <mat-card-header>
+      <img class="book-cover" mat-card-image routerLink="/livro/{{ book.cod }}"
+           src="{{ book.cover }}">
+    </mat-card-header>
+
+    <mat-card-content>
+      <h2 class="book-title">
+        <a routerLink="/livro/{{ book.cod }}">{{ book.title }}</a>
+        <span class="book-volume" *ngIf="book.volume">Volume {{ book.volume }}</span>
+      </h2>
+      <span class="book-edition">{{ book.edition }}ª edição</span>
+      <span class="book-author">{{ book.author }}</span>
+    </mat-card-content>
+  </mat-card>
 </div>
