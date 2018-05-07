@@ -24,8 +24,10 @@
           <i class="fa fa-minus-circle"></i> Não disponível
         </span>
 
-        <button mat-raised-button color="warn" routerLink="./editar">Editar</button>
-        <button mat-raised-button color="accent" (click)="openNewInstanceDialog()"><i class="fa fa-plus-circle"></i> Adicionar instância</button>
+        <button mat-raised-button color="warn" routerLink="./editar" *ngxPermissionsOnly="'DIACOM'">Editar</button>
+        <button mat-raised-button color="accent" (click)="openNewInstanceDialog()" *ngxPermissionsOnly="'DIACOM'">
+          <i class="fa fa-plus-circle"></i> Adicionar instância
+        </button>
       </div>
     </div>
   </mat-card>

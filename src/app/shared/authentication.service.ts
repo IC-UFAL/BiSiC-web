@@ -19,17 +19,10 @@ export class AuthenticationService {
     const ret = this.httpClient.post( 'http://localhost:8000/api/rest-auth/login/', user, {headers: headers}).share();
 
     ret.subscribe((data: any) => {
-      let permission;
-      if (data.user.is_DIACOM) {
-        permission = this.permissions[0];
-      } else {
-        permission = this.permissions[1];
-      }
-
       localStorage.setItem('token', data.token);
-      console.log('oi', permission);
-      localStorage.setItem('permission', permission);
-      this.permissionsService.loadPermissions([permission]);
+
+      localStorage.setItem('permission', this.getPermission(data.user));
+      this.permissionsService.loadPermissions([this.getPermission(data.user)]);
 
       this.user = data.user;
     }, error => console.log(error));
@@ -43,6 +36,9 @@ export class AuthenticationService {
     ret.subscribe((data: any) => {
       localStorage.setItem('token', data.token);
       this.user = data.user;
+
+      localStorage.setItem('permission', this.getPermission(data.user));
+      this.permissionsService.loadPermissions([this.getPermission(data.user)]);
     }, error => console.log(error));
     return ret;
   }
@@ -54,6 +50,8 @@ export class AuthenticationService {
     ret.subscribe(() => {
       this.user = undefined;
       localStorage.removeItem('token');
+      localStorage.removeItem('permission');
+      this.permissionsService.flushPermissions();
     }, error => console.log(error));
     return ret;
   }
@@ -64,12 +62,27 @@ export class AuthenticationService {
 
     ret.subscribe((data: any) => {
       this.user = data;
+      localStorage.setItem('permission', this.getPermission(data));
+      this.permissionsService.loadPermissions([this.getPermission(data)]);
     }, error => console.log(error));
     return ret;
   }
 
   getToken() {
     return localStorage.getItem('token');
+  }
+
+  getPermission(user?: User) {
+    let permission = localStorage.getItem('permission');
+
+    if (user) {
+      if (user.is_DIACOM) {
+        permission = this.permissions[0];
+      } else {
+        permission = this.permissions[1];
+      }
+    }
+    return permission;
   }
 
   getLoggedUser() {
