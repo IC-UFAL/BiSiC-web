@@ -4,19 +4,33 @@ import {User, RegisterUser} from './models/user';
 import 'rxjs/add/operator/share';
 import {Observable} from 'rxjs/Observable';
 import {Observer} from 'rxjs/Observer';
+import {NgxPermissionsService} from 'ngx-permissions';
 
 @Injectable()
 export class AuthenticationService {
   user: User;
+  permissions = ['DIACOM', 'STUDENT'];
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient,
+              private permissionsService: NgxPermissionsService) { }
 
   login(user) {
     const headers: HttpHeaders = new HttpHeaders();
     const ret = this.httpClient.post( 'http://localhost:8000/api/rest-auth/login/', user, {headers: headers}).share();
 
     ret.subscribe((data: any) => {
+      let permission;
+      if (data.user.is_DIACOM) {
+        permission = this.permissions[0];
+      } else {
+        permission = this.permissions[1];
+      }
+
       localStorage.setItem('token', data.token);
+      console.log('oi', permission);
+      localStorage.setItem('permission', permission);
+      this.permissionsService.loadPermissions([permission]);
+
       this.user = data.user;
     }, error => console.log(error));
     return ret;

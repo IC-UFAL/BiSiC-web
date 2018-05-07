@@ -39,6 +39,7 @@ import { LocationsComponent } from './notifications/locations/locations.componen
 import {UserService} from './shared/user.service';
 import {LocationsService} from './notifications/locations/locations.service';
 import { NewLocationComponent } from './location/new-location.component';
+import {NgxPermissionsModule} from 'ngx-permissions';
 
 const APP_ROUTES: Routes = [
   {
@@ -120,7 +121,8 @@ export const routing: ModuleWithProviders = RouterModule.forRoot(APP_ROUTES);
     MatProgressBarModule,
     MatTooltipModule,
     MatProgressSpinnerModule,
-    MatDialogModule
+    MatDialogModule,
+    NgxPermissionsModule.forRoot()
   ],
   entryComponents: [
     NewBookInstanceDialog
