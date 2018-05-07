@@ -15,7 +15,9 @@
       <span class="phone" *ngIf="donation.user?.phone">Telefone: {{ donation.user?.phone }}</span>
     </div>
 
-    <mat-checkbox color="warn" [(ngModel)]="donation.closed" (ngModelChange)="onChange(i, donation)">Concretizar!</mat-checkbox>
+    <mat-checkbox color="warn" [(ngModel)]="donation.closed" (ngModelChange)="onChange(i, donation)" *ngIf="!donation.closed">
+      Concretizar!
+    </mat-checkbox>
 
     <mat-error *ngIf="error[i]">
       *Algo deu errado ao atualizar esta doação.

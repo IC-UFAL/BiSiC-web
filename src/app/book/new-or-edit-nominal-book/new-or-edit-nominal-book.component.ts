@@ -9,6 +9,8 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./new-or-edit-nominal-book.component.scss']
 })
 export class NewOrEditNominalBookComponent {
+
+  action = 'Criar';
   editBook: NominalBook;
   hasError;
   isLoading = true;
@@ -25,6 +27,7 @@ export class NewOrEditNominalBookComponent {
       if (params['cod'] !== undefined) {
         this.isLoading = true;
         this.isEditting = true;
+        this.action = 'Editar';
 
         this.bookService.getNominalBook(+params['cod']).subscribe(book => {
           this.editBook = book;
