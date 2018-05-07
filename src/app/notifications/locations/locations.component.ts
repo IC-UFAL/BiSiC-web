@@ -19,7 +19,8 @@ export class LocationsComponent {
 
   constructor(private locationsService: LocationsService,
               private userService: UserService,
-              private bookService: BookService) {
+              private bookService: BookService,
+              private notificationService: NotificationService) {
     this.locationsService.getAllLocations().subscribe((data: Location[]) => {
       data = data.reverse();
       const currDate = this.formatDate(new Date());
@@ -40,7 +41,9 @@ export class LocationsComponent {
     this.error[idx] = false;
 
     this.locationsService.updateLocation(loc)
-      .subscribe(() => {},
+      .subscribe(() => {
+          this.notificationService.notificationEmitter.emit(true);
+        },
         err => {
           console.log(err);
           this.error[idx] = true;
