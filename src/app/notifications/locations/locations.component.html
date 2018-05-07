@@ -14,7 +14,9 @@
       <span class="email">E-mail: {{ loc.user?.email }}</span>
     </div>
 
-    <mat-checkbox color="warn" [(ngModel)]="loc.closed" (ngModelChange)="onChange(i, loc)">Fechar locação</mat-checkbox>
+    <mat-checkbox color="warn" [(ngModel)]="loc.closed" (ngModelChange)="onChange(i, loc)" *ngIf="!loc.closed">
+      Fechar locação
+    </mat-checkbox>
 
     <mat-error *ngIf="error[i]">
       *Algo deu errado ao atualizar esta doação.
