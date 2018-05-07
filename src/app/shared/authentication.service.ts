@@ -4,12 +4,15 @@ import {User, RegisterUser} from './models/user';
 import 'rxjs/add/operator/share';
 import {Observable} from 'rxjs/Observable';
 import {Observer} from 'rxjs/Observer';
+import {NgxPermissionsService} from 'ngx-permissions';
 
 @Injectable()
 export class AuthenticationService {
   user: User;
+  permissions = ['DIACOM', 'STUDENT'];
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient,
+              private permissionsService: NgxPermissionsService) { }
 
   login(user) {
     const headers: HttpHeaders = new HttpHeaders();
@@ -17,6 +20,10 @@ export class AuthenticationService {
 
     ret.subscribe((data: any) => {
       localStorage.setItem('token', data.token);
+
+      localStorage.setItem('permission', this.getPermission(data.user));
+      this.permissionsService.loadPermissions([this.getPermission(data.user)]);
+
       this.user = data.user;
     }, error => console.log(error));
     return ret;
@@ -29,6 +36,9 @@ export class AuthenticationService {
     ret.subscribe((data: any) => {
       localStorage.setItem('token', data.token);
       this.user = data.user;
+
+      localStorage.setItem('permission', this.getPermission(data.user));
+      this.permissionsService.loadPermissions([this.getPermission(data.user)]);
     }, error => console.log(error));
     return ret;
   }
@@ -40,6 +50,8 @@ export class AuthenticationService {
     ret.subscribe(() => {
       this.user = undefined;
       localStorage.removeItem('token');
+      localStorage.removeItem('permission');
+      this.permissionsService.flushPermissions();
     }, error => console.log(error));
     return ret;
   }
@@ -50,12 +62,27 @@ export class AuthenticationService {
 
     ret.subscribe((data: any) => {
       this.user = data;
+      localStorage.setItem('permission', this.getPermission(data));
+      this.permissionsService.loadPermissions([this.getPermission(data)]);
     }, error => console.log(error));
     return ret;
   }
 
   getToken() {
     return localStorage.getItem('token');
+  }
+
+  getPermission(user?: User) {
+    let permission = localStorage.getItem('permission');
+
+    if (user) {
+      if (user.is_DIACOM) {
+        permission = this.permissions[0];
+      } else {
+        permission = this.permissions[1];
+      }
+    }
+    return permission;
   }
 
   getLoggedUser() {
