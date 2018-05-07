@@ -7,3 +7,9 @@ export class NominalBook {
   description: string;
   cover: string;
 }
+
+export class Book {
+  cod: number;
+  cod_nominal_book: number;
+  available: boolean;
+}

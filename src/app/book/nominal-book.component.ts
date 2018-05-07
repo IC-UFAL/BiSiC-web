@@ -23,8 +23,7 @@ export class NominalBookComponent {
         this.nominalBook = book;
         this.isLoading = false;
 
-        this.loadingAvailability = true;
-        this.loadAvailability();
+        this.checkAvailability();
       }, err => {
         console.log(err);
         this.isLoading = false;
@@ -40,12 +39,13 @@ export class NominalBookComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.loadAvailability().unsubscribe();
+        this.checkAvailability();
       }
     });
   }
 
-  private loadAvailability() {
+  private checkAvailability() {
+    this.loadingAvailability = true;
     return this.bookService.getNominalBookQuantity(this.nominalBook.cod).subscribe(qnt => {
       this.loadingAvailability = false;
       this.available = qnt > 0;
@@ -66,7 +66,7 @@ export class NewBookInstanceDialog {
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   onNoClick(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(true);
   }
 
   create() {

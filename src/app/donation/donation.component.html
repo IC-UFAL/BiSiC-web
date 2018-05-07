@@ -19,7 +19,7 @@
     </mat-card-footer>
   </mat-card>
 
-  <mat-card *ngIf="!isLogged()">
+  <mat-card *ngIf="!isLogged()" class="error">
     <mat-error>
       <i class="material-icons">warning</i>
       Você precisa fazer <a routerLink="/login">login</a> para fazer uma doação.

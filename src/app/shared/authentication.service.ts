@@ -60,7 +60,7 @@ export class AuthenticationService {
 
   loginByToken() {
     const headers: HttpHeaders = new HttpHeaders({Authorization: 'Bearer ' + this.getToken()});
-    const ret = this.httpClient.get( 'http://localhost:8000/api/rest-auth/user/', {headers: headers}).share();
+    const ret = this.httpClient.get<User>( 'http://localhost:8000/api/rest-auth/user/', {headers: headers}).share();
 
     ret.subscribe((data: any) => {
       this.user = data;

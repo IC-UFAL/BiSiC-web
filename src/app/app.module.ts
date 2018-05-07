@@ -12,7 +12,7 @@ import {
   MatFormFieldModule,
   MatIconModule,
   MatInputModule, MatListModule,
-  MatMenuModule, MatProgressBarModule, MatProgressSpinnerModule, MatTabsModule,
+  MatMenuModule, MatProgressBarModule, MatProgressSpinnerModule, MatSelectModule, MatTabsModule,
   MatToolbarModule, MatTooltipModule
 } from '@angular/material';
 import {MatCheckboxModule} from '@angular/material/checkbox';
@@ -40,6 +40,8 @@ import {UserService} from './shared/user.service';
 import {LocationsService} from './notifications/locations/locations.service';
 import { NewLocationComponent } from './location/new-location.component';
 import {NgxPermissionsModule} from 'ngx-permissions';
+import {AuthDIACOMGuard} from './shared/auth-diacom.guard';
+import {NotificationService} from './notifications/shared/notification.service';
 
 const APP_ROUTES: Routes = [
   {
@@ -63,18 +65,34 @@ const APP_ROUTES: Routes = [
       {
         path: 'livro',
         children: [
-          { path: 'novo', component: NewOrEditNominalBookComponent },
+          {
+            path: 'novo',
+            component: NewOrEditNominalBookComponent,
+            canActivate: [AuthDIACOMGuard]
+          },
           {
             path: ':cod',
             children: [
-              {path: 'editar', component: NewOrEditNominalBookComponent },
+              {
+                path: 'editar',
+                component: NewOrEditNominalBookComponent,
+                canActivate: [AuthDIACOMGuard]
+              },
               {path: '', component: NominalBookComponent }
             ]
           }
         ]
       },
-      { path: 'locacao/nova', component: NewLocationComponent },
-      { path: 'notificacoes', component: NotificationsComponent },
+      {
+        path: 'locacao/nova',
+        component: NewLocationComponent,
+        canActivate: [AuthDIACOMGuard]
+      },
+      {
+        path: 'notificacoes',
+        component: NotificationsComponent,
+        canActivate: [AuthDIACOMGuard]
+      },
       { path: '' , component: HomeComponent }
     ]
   }
@@ -122,6 +140,7 @@ export const routing: ModuleWithProviders = RouterModule.forRoot(APP_ROUTES);
     MatTooltipModule,
     MatProgressSpinnerModule,
     MatDialogModule,
+    MatSelectModule,
     NgxPermissionsModule.forRoot()
   ],
   entryComponents: [
@@ -131,10 +150,12 @@ export const routing: ModuleWithProviders = RouterModule.forRoot(APP_ROUTES);
     AuthenticationService,
     BookService,
     AuthGuard,
+    AuthDIACOMGuard,
     UserResolver,
     DonationsService,
     UserService,
     LocationsService,
+    NotificationService,
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true} }
   ],
   bootstrap: [AppComponent]

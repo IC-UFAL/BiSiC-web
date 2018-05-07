@@ -14,29 +14,55 @@
         </div>
 
         <mat-list-item *ngFor="let s of searchResponse['student']" (click)="selectStudent(s)">
-          {{ s.email }}
-          <mat-divider></mat-divider>
+          <img class="cover" src="{{ s.picture ? s.picture : 'https://i.imgur.com/y5mUl5e.png' }}">
+          <div class="info">
+            <span class="title">
+              {{ getUserFullName(s) }}
+            </span>
+            <span class="author">{{ s.email }}</span>
+          </div>
         </mat-list-item>
       </mat-list>
     </div>
 
     <div class="wrapper">
       <mat-form-field class="popover__wrapper">
-        <input matInput placeholder="Livro" required (focus)="onFocus('book')" (blur)="onBlur('book')"
-               [(ngModel)]="bookSearch" (ngModelChange)="onChange('book', $event)">
+        <input matInput placeholder="Livro nominal" required (focus)="onFocus('nomBook')" (blur)="onBlur('nomBook')"
+               [(ngModel)]="bookSearch" (ngModelChange)="onChange('nomBook', $event)">
       </mat-form-field>
 
-      <mat-list class="popover" [class.visible]="isVisible === 'book'">
-        <div class="progress-container" *ngIf="isLoading === 'book'">
+      <mat-list class="popover" [class.visible]="isVisible === 'nomBook'">
+        <div class="progress-container" *ngIf="isLoading === 'nomBook'">
           <mat-progress-bar mode="indeterminate"></mat-progress-bar>
         </div>
 
-        <mat-list-item *ngFor="let b of searchResponse['book']" (click)="selectBook(b)">
-          {{ b.title }}
-          <mat-divider></mat-divider>
+        <mat-list-item *ngFor="let b of searchResponse['nomBook']" (click)="selectBook(b)">
+          <img class="cover" src="{{ b.cover }}">
+          <div class="info">
+            <span class="title">
+              {{ b.title }} <span class="volume" *ngIf="b.volume">Volume {{ b.volume }}</span>
+            </span>
+            <span class="author">{{ b.author }}</span>
+          </div>
         </mat-list-item>
+
+        <mat-error *ngIf="searchResponse['nomBook']?.length === 0">
+          Nenhum livro foi encontrado.
+        </mat-error>
       </mat-list>
     </div>
+
+    <mat-progress-bar mode="indeterminate" *ngIf="isLoading === 'book'"></mat-progress-bar>
+    <mat-error *ngIf="isLoading !== 'book' && searchResponse['book']?.length === 0">
+      Não há livros físicos cadastrados.
+    </mat-error>
+    <mat-form-field *ngIf="isLoading !== 'book' && searchResponse['book']?.length > 0">
+      <mat-select placeholder="Livro físico" required [(ngModel)]="location.cod_book">
+        <mat-option *ngFor="let book of searchResponse['book']" [value]="book.cod">
+          {{ book.cod }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
     <mat-error *ngIf="error">*Algo deu errado.</mat-error>
 
